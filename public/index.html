@@ -11,14 +11,22 @@
 </head>
 <body>
     <a-scene>
+        <!-- Assets -->
         <a-assets>
             <!-- "Nintendo Zapper Light Gun" (https://skfb.ly/6RGWW) by Matt Wilson is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).-->
-            <a-asset-item id="zapper_model" src="./assets/zapper/scene.gltf" preload="auto" crossorigin="anonymous"></a-asset-item>
+            <a-asset-item 
+                id="zapper_model" 
+                src="./assets/zapper/scene.gltf" 
+                preload="auto" 
+                crossorigin="anonymous">
+            </a-asset-item>
         </a-assets>
         <!-- Camera -->
         <a-entity camera wasd-controls look-controls position="0 1.6 0">
             <!-- Desktop/Mobile pointer-->
             <a-entity cursor="rayOrigin:mouse" raycaster="far:20; interval:100; objects:.interactive"></a-entity>
+            <!-- Zapper model -->
+            <a-entity id="zapper" position="-0.5 -1 -1.5" scale="0.1 0.1 0.1" rotation="0 90 0" gltf-model="#zapper_model"></a-entity>
         </a-entity>
         <!-- Environment-->
         <a-entity environment="preset:forest"></a-entity>
