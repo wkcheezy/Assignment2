@@ -37,6 +37,18 @@
 
         <!-- Environment-->
         <a-entity environment="preset:forest"></a-entity>
+
+        <!-- Start/Restart button-->
+        <a-entity id="button_universal">
+            <a-entity geometry="primitive:box; width:0.5; depth:0.5; height:0.5;" position="0 0.3 0" material="color:white;">
+            </a-entity>
+            <a-entity class="button interactive" spinning-effect="duration:18000"
+                geometry="primitive:cylinder; radius:0.15; height:0.2;" position="0 0.6 0" material="color:rgb(255, 100, 100);"
+                animation__mouseenter="property:material.color; type:color; to:rgb(255, 0, 0); dur:200; startEvents:mouseenter;"
+                animation__mouseleave="property:material.color; type:color; to:rgb(255, 100, 100); dur:200; startEvents:mouseleave;"
+                animation__click="property:position.y; from:0.5; to:0.6; dur:200; startEvents:click;">
+            </a-entity>
+        </a-entity>
     </a-scene>
 </body>
 </html>
