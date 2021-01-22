@@ -33,7 +33,6 @@ AFRAME.registerComponent('gamerunner', {
         })
     },
     tick: function () {
-        console.log(this.data.countdown);
         if (this.data.gameRunning === true){
             if (this.data.countdown > 0){
                 this.data.countdown--;

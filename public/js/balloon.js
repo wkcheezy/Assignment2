@@ -7,6 +7,10 @@ AFRAME.registerComponent('balloon', {
         speed: {
             type: 'number',
             default: 1
+        },
+        maxheight: { 
+            type: 'number', 
+            default: 1000
         }
     },
 
