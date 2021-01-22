@@ -39,7 +39,6 @@ AFRAME.registerComponent('gamerunner', {
             }
             else{
                 this.data.countdown = this.data.countdownReset;
-                console.log("Creating balloon!");
                 document.getElementById('balloons').insertAdjacentHTML("beforeend", '<a-entity balloon class="balloon interactive" geometry="primitive:sphere; radius:0.5;" position="0 1 -3" material="color:red;"></a - entity >');
             }
       }
