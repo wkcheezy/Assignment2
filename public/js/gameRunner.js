@@ -17,7 +17,7 @@ AFRAME.registerComponent('gamerunner', {
     init: function () {
         const self = this;
 
-        self.el.addEventListener('click', function (){
+        self.el.addEventListener('click', () => {
             if (self.data.gameRunning === true){
                 //TODO: Switch to that new method
                 balloons = document.getElementsByClassName('balloon');
