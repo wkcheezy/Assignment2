@@ -16,12 +16,11 @@ AFRAME.registerComponent('gamerunner', {
 
     init: function () {
         const self = this;
-
         self.el.addEventListener('click', () => {
             if (self.data.gameRunning === true){
-                balloons = document.querySelectorAll('.balloon');
-                balloons.forEach(element => {
-                    element.destroy();
+                document.querySelectorAll('.balloon').forEach(element => {
+                    //TODO: Switch the destroy method in the balloon to this?
+                    element.parentNode.removeChild(element);
                 });
                 self.data.gameRunning = false;
             }
