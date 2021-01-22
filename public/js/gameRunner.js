@@ -19,8 +19,7 @@ AFRAME.registerComponent('gamerunner', {
 
         self.el.addEventListener('click', () => {
             if (self.data.gameRunning === true){
-                //TODO: Switch to that new method
-                balloons = document.getElementsByClassName('balloon');
+                balloons = document.querySelectorAll('.balloon');
                 balloons.forEach(element => {
                     element.destroy();
                 });
@@ -39,7 +38,7 @@ AFRAME.registerComponent('gamerunner', {
             }
             else{
                 this.data.countdown = this.data.countdownReset;
-                document.getElementById('balloons').insertAdjacentHTML("beforeend", '<a-entity balloon class="balloon interactive" geometry="primitive:sphere; radius:0.5;" position="0 1 -3" material="color:red;"></a - entity >');
+                document.querySelector('#balloons').insertAdjacentHTML("beforeend", '<a-entity balloon class="balloon interactive" geometry="primitive:sphere; radius:0.5;" position="0 1 -3" material="color:red;"></a - entity >');
             }
       }
     }
