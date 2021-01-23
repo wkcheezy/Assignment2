@@ -29,6 +29,13 @@ AFRAME.registerComponent('balloon', {
             dur: CONTEXT_AF.data.duration,
             enabled: true
         });
+        //Set random point value
+        //TODO: Add const value for max point value (and by extension max width). Current: 9/0.9
+        CONTEXT_AF.data.points = Math.floor(Math.random() * 9) + 1;
+        console.log(CONTEXT_AF.data.points);
+        //Set balloon scale based on point value
+        let scaleVal = (10 - CONTEXT_AF.data.points) * 0.1;
+        CONTEXT_AF.el.setAttribute('scale', { x: scaleVal, y: scaleVal, z: scaleVal });
         //If a click is detected on the balloon
         CONTEXT_AF.el.addEventListener('click', () => {
             //TODO: Add points

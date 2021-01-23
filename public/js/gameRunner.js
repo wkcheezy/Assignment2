@@ -37,7 +37,8 @@ AFRAME.registerComponent('gamerunner', {
             }
             else{
                 this.data.countdown = this.data.countdownReset;
-                document.querySelector('#balloons').insertAdjacentHTML("beforeend", '<a-entity balloon class="balloon interactive" geometry="primitive:sphere; radius:0.5;" position="0 1 -3" material="color:red;"></a - entity >');
+                //Create new balloon element
+                document.querySelector('#balloons').insertAdjacentHTML("beforeend", '<a-entity balloon class="balloon interactive" geometry="primitive:sphere; radius:0.5;" position="0 1 0" material="color:red;"></a-entity >');
             }
       }
     }
