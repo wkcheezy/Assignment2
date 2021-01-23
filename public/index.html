@@ -22,7 +22,12 @@
                 preload="auto" 
                 crossorigin="anonymous">
             </a-asset-item>
+            <!-- "Party Pack, Balloons, Popping, 02-01.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org (www.freesound.org)-->
+            <audio id="pop_sound" src="./assets/pop.mp3" preload="auto" crossorigin="anonymous"></audio>
         </a-assets>
+
+        <!-- Preloading sound -->
+        <a-entity id="pop" sound="src:#pop_sound"></a-entity>
 
         <!-- Camera -->
         <a-entity camera wasd-controls look-controls position="0 2.2 6">

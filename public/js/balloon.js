@@ -39,6 +39,8 @@ AFRAME.registerComponent('balloon', {
         //If a click is detected on the balloon
         CONTEXT_AF.el.addEventListener('click', () => {
             //TODO: Add points
+            //TODO: Fix sound on Firefox
+            document.querySelector('[sound]').components.sound.playSound();
             CONTEXT_AF.el.remove();
         });
     },
