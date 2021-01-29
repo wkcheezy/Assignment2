@@ -1,3 +1,4 @@
+//TODO: Add dict for colors
 AFRAME.registerComponent('balloon', {
     schema: {
         points: {
@@ -20,19 +21,9 @@ AFRAME.registerComponent('balloon', {
 
     init: function () {
         const CONTEXT_AF = this;
-
-        CONTEXT_AF.el.setAttribute('animation', {
-            property: 'position.y',
-            from: CONTEXT_AF.data.startHeight,
-            to: CONTEXT_AF.data.maxheight,
-            loop: false,
-            dur: CONTEXT_AF.data.duration,
-            enabled: true
-        });
         //Set random point value
         //TODO: Add const value for max point value (and by extension max width). Current: 9/0.9
         CONTEXT_AF.data.points = Math.floor(Math.random() * 9) + 1;
-        console.log(CONTEXT_AF.data.points);
         //Set balloon scale based on point value
         let scaleVal = (10 - CONTEXT_AF.data.points) * 0.1;
         CONTEXT_AF.el.setAttribute('scale', { x: scaleVal, y: scaleVal, z: scaleVal });
@@ -41,13 +32,34 @@ AFRAME.registerComponent('balloon', {
             //TODO: Add points
             //TODO: Fix sound on Firefox
             document.querySelector('[sound]').components.sound.playSound();
+            //Delete balloon
             CONTEXT_AF.el.remove();
         });
     },
 
+    update: function() {
+        //TODO: Set random position
+        //TODO: Swap this variable creation with just setting the positions
+        const CONTEXT_AF = this;
+        let bx = 0;
+        let bz = 0;
+        while (true) {
+            bx = Math.floor(Math.random() * 25) + 1;
+            bz = Math.floor(Math.random() * 25) + 1;
+            if (Math.sqrt(bx * bx + bz * bz) < 25) {
+                break;
+            }
+        }
+        CONTEXT_AF.el.object3D.position.set(bx, -1, bz);
+        console.log(CONTEXT_AF.el.object3D.position)
+    },
+
     tick: function () {
-        if (this.el.getAttribute('position').y >= this.data.maxheight){
+        if (this.el.object3D.position.y >= this.data.maxheight){
             this.el.remove();
+        }
+        else{
+            this.el.object3D.position.y += 0.01;
         }
     }
 });
