@@ -51,7 +51,6 @@ AFRAME.registerComponent('balloon', {
             }
         }
         CONTEXT_AF.el.object3D.position.set(bx, CONTEXT_AF.data.startHeight, bz);
-        console.log(CONTEXT_AF.el.object3D.position)
     },
 
     tick: function () {
