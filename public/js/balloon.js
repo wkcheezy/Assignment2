@@ -12,10 +12,15 @@ AFRAME.registerComponent('balloon', {
         maxheight: { 
             type: 'number', 
             default: 10
+        },
+        riseRate:{
+            type: 'number',
+            default: 0.1
         }
     },
 
     init: function () {
+        //TODO: Transfer all the properties in gameRunner to here
         const CONTEXT_AF = this;
         //Set random point value
         //TODO: Add const value for max point value (and by extension max width). Current: 9/0.9
@@ -34,7 +39,6 @@ AFRAME.registerComponent('balloon', {
     },
 
     update: function() {
-        //TODO: Set random position
         //TODO: Swap this variable creation with just setting the positions
         const CONTEXT_AF = this;
         let bx = 0;
@@ -55,7 +59,7 @@ AFRAME.registerComponent('balloon', {
             this.el.remove();
         }
         else{
-            this.el.object3D.position.y += 0.01;
+            this.el.object3D.position.y += this.data.riseRate;
         }
     }
 });
