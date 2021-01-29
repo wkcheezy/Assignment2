@@ -42,7 +42,7 @@ AFRAME.registerComponent('balloon', {
             //TODO: Fix sound on Firefox
             document.querySelector('[sound]').components.sound.playSound();
             //Delete balloon
-            CONTEXT_AF.el.remove();
+            CONTEXT_AF.el.parentNode.removeChild(CONTEXT_AF.el);
         });
     },
 
