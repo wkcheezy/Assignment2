@@ -15,7 +15,7 @@ AFRAME.registerComponent('balloon', {
         },
         riseRate:{
             type: 'number',
-            default: 0.1
+            default: 0.05
         }
     },
 
