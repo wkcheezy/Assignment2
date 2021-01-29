@@ -5,10 +5,6 @@ AFRAME.registerComponent('balloon', {
             type: 'number',
             default: 1
         },
-        duration: {
-            type: 'number',
-            default: 10000
-        },
         startHeight: {
             type: 'number',
             default: 1
