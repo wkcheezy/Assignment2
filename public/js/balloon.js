@@ -20,7 +20,6 @@ AFRAME.registerComponent('balloon', {
     },
 
     init: function () {
-        //TODO: Transfer all the properties in gameRunner to here
         const CONTEXT_AF = this;
         //Set random point value
         //TODO: Add const value for max point value (and by extension max width). Current: 9/0.9
@@ -38,7 +37,8 @@ AFRAME.registerComponent('balloon', {
         CONTEXT_AF.el.setAttribute('scale', { x: scaleVal, y: scaleVal, z: scaleVal });
         //If a click is detected on the balloon
         CONTEXT_AF.el.addEventListener('click', () => {
-            //TODO: Add points
+            //Add points
+            document.querySelector('#gamerunner').components.gamerunner.data.score += CONTEXT_AF.data.points;
             //TODO: Fix sound on Firefox
             document.querySelector('[sound]').components.sound.playSound();
             //Delete balloon
