@@ -32,7 +32,10 @@ AFRAME.registerComponent('balloon', {
         });
         //Set the balloon material
         //TODO: Set the balloon color based on its point value
-        CONTEXT_AF.el.setAttribute('material', {color: 'red'});
+        CONTEXT_AF.el.setAttribute('material', {
+            color: 'red',
+            opacity: 0.5
+        });
         //Set balloon scale based on point value
         let scaleVal = (10 - CONTEXT_AF.data.points) * 0.1;
         CONTEXT_AF.el.setAttribute('scale', { x: scaleVal, y: scaleVal, z: scaleVal });
