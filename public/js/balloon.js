@@ -1,4 +1,5 @@
 //TODO: Add dict for colors
+//TODO: Maybe make the player pick up money dropped by ballon and drop into bucket? Alyx possible through https://threejs.org/docs/index.html#api/en/math/Vector3.lerp
 AFRAME.registerComponent('balloon', {
     schema: {
         points: {
@@ -44,10 +45,20 @@ AFRAME.registerComponent('balloon', {
             //Delete balloon
             CONTEXT_AF.el.parentNode.removeChild(CONTEXT_AF.el);
         });
+        //Add light
+        let light = document.createElement('a-entity');
+        light.setAttribute('light',{
+            color: 'red',
+            type: 'point',
+            intensity: 0.75,
+            distance: 50,
+            decay: 2
+        });
+        console.log(light);
+        CONTEXT_AF.el.appendChild(light);
     },
 
     update: function() {
-        //TODO: Swap this variable creation with just setting the positions
         const CONTEXT_AF = this;
         let bx = 0;
         let bz = 0;
@@ -59,6 +70,8 @@ AFRAME.registerComponent('balloon', {
             }
         }
         CONTEXT_AF.el.object3D.position.set(bx, CONTEXT_AF.data.startHeight, bz);
+        //Set light's position
+        CONTEXT_AF.el.firstChild.object3D.position.set(bx, CONTEXT_AF.data.startHeight, bz);
     },
 
     tick: function () {
@@ -67,6 +80,7 @@ AFRAME.registerComponent('balloon', {
         }
         else{
             this.el.object3D.position.y += this.data.riseRate;
+            this.el.firstChild.object3D.position.y += this.data.riseRate;
         }
     }
 });
