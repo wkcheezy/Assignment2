@@ -1,4 +1,3 @@
-//TODO: Add dict for colors
 //TODO: Maybe make the player pick up money dropped by ballon and drop into bucket? Alyx possible through https://threejs.org/docs/index.html#api/en/math/Vector3.lerp
 AFRAME.registerComponent('balloon', {
     schema: {
@@ -33,7 +32,6 @@ AFRAME.registerComponent('balloon', {
         //Set the balloon material
         //TODO: Set the balloon color based on its point value
         CONTEXT_AF.el.setAttribute('material', {
-            color: 'red',
             opacity: 0.5
         });
         //Set balloon scale based on point value
@@ -48,11 +46,8 @@ AFRAME.registerComponent('balloon', {
         //Add light
         let light = document.createElement('a-entity');
         light.setAttribute('light',{
-            color: CONTEXT_AF.el.getAttribute('material').color,
-            type: 'point',
-            intensity: 0.75,
-            distance: 50,
-            decay: 2
+            color: getRandomColor(),
+            type: 'point'
         });
         light.setAttribute('visible', false);
         CONTEXT_AF.el.appendChild(light);
@@ -86,3 +81,13 @@ AFRAME.registerComponent('balloon', {
         }
     }
 });
+
+// Function from https://aframe.io/docs/1.1.0/guides/building-a-minecraft-demo.html#random-color-component
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
