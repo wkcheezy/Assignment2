@@ -80,7 +80,6 @@ AFRAME.registerComponent('balloon', {
         }
         else{
             this.el.object3D.position.y += this.data.riseRate;
-            this.el.firstChild.object3D.position.y += this.data.riseRate;
         }
     }
 });
