@@ -38,12 +38,9 @@ AFRAME.registerComponent('balloon', {
         CONTEXT_AF.el.setAttribute('scale', { x: scaleVal, y: scaleVal, z: scaleVal });
         //If a click is detected on the balloon
         CONTEXT_AF.el.addEventListener('click', () => {
-            //Add points
-            document.querySelector('#gamerunner').components.gamerunner.data.score += CONTEXT_AF.data.points;
             //TODO: Fix sound on Firefox
             document.querySelector('[sound]').components.sound.playSound();
-            //Delete balloon
-            CONTEXT_AF.el.parentNode.removeChild(CONTEXT_AF.el);
+            CONTEXT_AF.el.firstChild.setAttribute('visible', true);
         });
         //Add light
         let light = document.createElement('a-entity');
@@ -74,7 +71,12 @@ AFRAME.registerComponent('balloon', {
 
     tick: function () {
         if (this.el.object3D.position.y >= this.data.maxheight){
-            this.el.remove();
+            if (this.el.firstChild.getAttribute('visible')) {
+                //Add points
+                document.querySelector('#gamerunner').components.gamerunner.data.score += this.data.points;
+            }
+            //Delete balloon
+            this.el.parentNode.removeChild(this.el);
         }
         else{
             this.el.object3D.position.y += this.data.riseRate;
