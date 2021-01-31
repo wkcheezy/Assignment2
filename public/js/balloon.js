@@ -70,8 +70,6 @@ AFRAME.registerComponent('balloon', {
             }
         }
         CONTEXT_AF.el.object3D.position.set(bx, CONTEXT_AF.data.startHeight, bz);
-        //Set light's position
-        CONTEXT_AF.el.firstChild.object3D.position.set(bx, CONTEXT_AF.data.startHeight, bz);
     },
 
     tick: function () {
