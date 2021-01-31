@@ -48,13 +48,12 @@ AFRAME.registerComponent('balloon', {
         //Add light
         let light = document.createElement('a-entity');
         light.setAttribute('light',{
-            color: 'red',
+            color: CONTEXT_AF.el.getAttribute('material').color,
             type: 'point',
             intensity: 0.75,
             distance: 50,
             decay: 2
         });
-        console.log(light);
         CONTEXT_AF.el.appendChild(light);
     },
 
