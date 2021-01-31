@@ -54,6 +54,7 @@ AFRAME.registerComponent('balloon', {
             distance: 50,
             decay: 2
         });
+        light.setAttribute('visible', false);
         CONTEXT_AF.el.appendChild(light);
     },
 
