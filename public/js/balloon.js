@@ -69,18 +69,19 @@ AFRAME.registerComponent('balloon', {
     },
 
     tick: function () {
-        if (this.el.object3D.position.y >= this.data.maxheight){
-            if (this.el.firstChild.getAttribute('visible')) {
+        const CONTEXT_AF = this;
+        if (CONTEXT_AF.el.object3D.position.y >= CONTEXT_AF.data.maxheight){
+            if (CONTEXT_AF.el.firstChild.getAttribute('visible')) {
                 //Add points
-                document.querySelector('#gamerunner').components.gamerunner.data.score += this.data.points;
+                document.querySelector('#gamerunner').components.gamerunner.data.score += CONTEXT_AF.data.points;
                 //Set sky and environemnt lights to ball color
-                document.querySelector('a-sky').setAttribute('material', 'topColor', this.el.firstChild.getAttribute('light').color);
+                document.querySelector('a-sky').setAttribute('material', 'topColor', CONTEXT_AF.el.firstChild.getAttribute('light').color);
             }
             //Delete balloon
-            this.el.parentNode.removeChild(this.el);
+            CONTEXT_AF.el.parentNode.removeChild(CONTEXT_AF.el);
         }
         else{
-            this.el.object3D.position.y += this.data.riseRate;
+            CONTEXT_AF.el.object3D.position.y += CONTEXT_AF.data.riseRate;
         }
     }
 });
