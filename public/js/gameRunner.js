@@ -18,7 +18,7 @@ AFRAME.registerComponent('gamerunner', {
         },
         colorFadeRate: {
             type: 'number',
-            default: 10
+            default: 1
         }
     },
 
@@ -44,7 +44,6 @@ AFRAME.registerComponent('gamerunner', {
         })
     },
     tick: function () {
-        //TODO: Add point and countdown text updates
         const self = this
         if (self.data.gameRunning === true){
             if (self.data.countdown > 0){
@@ -61,7 +60,7 @@ AFRAME.registerComponent('gamerunner', {
                     value: self.data.score
                 });
             });
-            //TODO: Reduce sky color
+            //Reduce sky color
             let skyColor = document.querySelector('a-sky').getAttribute('material').topColor;
             if (skyColor !== '#0d0d0d'){
                 //Convert RGB to Hex
