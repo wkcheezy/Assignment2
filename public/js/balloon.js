@@ -55,6 +55,7 @@ AFRAME.registerComponent('balloon', {
 
     update: function() {
         const CONTEXT_AF = this;
+        //TODO: Reduce the play circle radius
         let bx = 0;
         let bz = 0;
         while (true) {
@@ -72,6 +73,8 @@ AFRAME.registerComponent('balloon', {
             if (this.el.firstChild.getAttribute('visible')) {
                 //Add points
                 document.querySelector('#gamerunner').components.gamerunner.data.score += this.data.points;
+                //Set sky and environemnt lights to ball color
+                document.querySelector('a-sky').setAttribute('material', 'topColor', this.el.firstChild.getAttribute('light').color);
             }
             //Delete balloon
             this.el.parentNode.removeChild(this.el);

@@ -15,6 +15,10 @@ AFRAME.registerComponent('gamerunner', {
         score: {
             type: 'number',
             default: 0
+        },
+        colorFadeRate: {
+            type: 'number',
+            default: 10
         }
     },
 
@@ -57,6 +61,36 @@ AFRAME.registerComponent('gamerunner', {
                     value: self.data.score
                 });
             });
+            //TODO: Reduce sky color
+            let skyColor = document.querySelector('a-sky').getAttribute('material').topColor;
+            if (skyColor !== '#0d0d0d'){
+                //Convert RGB to Hex
+                let hex = '#';
+                //Convert the sky's color from hex to RGB for reducing
+                rgb = convertToRGB(skyColor);
+                //Reduce the value of each RGB value (not below 13)
+                for (let i = 0; i < rgb.length; i++) {
+                    if (rgb[i] - self.data.colorFadeRate < 13 || rgb[i] === 13){
+                        rgb[i] = 13;
+                    }
+                    else{
+                        rgb[i] -= self.data.colorFadeRate;
+                    }
+                    rgb[i] = rgb[i].toString(16);
+                    rgb[i].length == 1 ? hex += "0" + rgb[i] : hex += rgb[i]; 
+                }
+                console.log(hex);
+                document.querySelector('a-sky').setAttribute('material', 'topColor', hex);
+            }
         }
     }
 });
+
+// Function modified from: https://www.tutorialspoint.com/hexadecimal-color-to-rgb-color-javascript
+function convertToRGB(hex){
+    let r = 0, g = 0, b = 0;
+    r = "0x" + hex[1] + hex[2];
+    g = "0x" + hex[3] + hex[4];
+    b = "0x" + hex[5] + hex[6];
+    return [+r, +g, +b];
+}
