@@ -36,13 +36,6 @@
     <a-scene>
         <!-- Assets -->
         <a-assets>
-            <!-- "Nintendo Zapper Light Gun" (https://skfb.ly/6RGWW) by Matt Wilson is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).-->
-            <a-asset-item 
-                id="zapper_model" 
-                src="./assets/zapper/scene.gltf" 
-                preload="auto" 
-                crossorigin="anonymous">
-            </a-asset-item>
             <!-- "Party Pack, Balloons, Popping, 02-01.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org (www.freesound.org)-->
             <audio id="pop_sound" src="./assets/pop.mp3" preload="auto" crossorigin="anonymous"></audio>
         </a-assets>
@@ -56,14 +49,6 @@
             <a-entity 
                 cursor="rayOrigin:mouse"
                 raycaster="far:20; interval:100; objects:.interactive">
-            </a-entity>
-            <!-- Zapper model -->
-            <a-entity 
-                id="zapper" 
-                position="0 -1 -1.5" 
-                scale="0.08 0.08 0.08" 
-                rotation="0 90 0" 
-                gltf-model="#zapper_model">
             </a-entity>
         </a-entity>
 
