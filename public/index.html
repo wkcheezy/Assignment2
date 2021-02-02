@@ -15,19 +15,31 @@
         //Lightcube grab/drop
         document.addEventListener('keyup', function(e){
             if (e.keyCode === 69) {
-                //Get raycaster
-                //console.log(document.querySelector("a-entity[raycaster]").components.raycaster.instersectedEls);
+                const heldCube = document.querySelector("a-entity[camera] > a-entity[lightcube]");
+                if (heldCube) {
+                    let cube = document.createElement('a-entity');
+                    //TODO: Get cube to match rotation of where the camera is facing
+                    cube.setAttribute('lightcube', {
+                        x: document.querySelector("a-entity[camera]").object3D.position.x,
+                        y: 0.5,
+                        z: document.querySelector("a-entity[camera]").object3D.position.z - 3.0
+                    });
+                    //Add cube to world
+                    document.querySelector("#cubes").appendChild(cube);
+                    heldCube.parentNode.removeChild(heldCube);
+                }
                 let closest = undefined;
                 document.querySelectorAll("a-entity .lightcube").forEach(element => {
                     intersection = document.querySelector("a-entity[raycaster]").components.raycaster.getIntersection(element);
-                    if (intersection != undefined){
+                    if (intersection){
                         if (closest === undefined || intersection.distance < closest.distance){
                             closest = intersection;
                         }
                     }
                 });
+                if (closest){
                 closest.object.el.components.lightcube.data.moveTowards = true;
-                
+                }
             }
         });
     </script>
