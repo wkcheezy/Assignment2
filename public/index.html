@@ -8,8 +8,29 @@
     <title>IMD3901B Assignment 2</title>
     <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+    <script src="./js/lightcube.js"></script>
     <script src="./js/balloon.js"></script>
     <script src="./js/gameRunner.js"></script>
+    <script>
+        //Lightcube grab/drop
+        document.addEventListener('keyup', function(e){
+            if (e.keyCode === 69) {
+                //Get raycaster
+                //console.log(document.querySelector("a-entity[raycaster]").components.raycaster.instersectedEls);
+                let closest = undefined;
+                document.querySelectorAll("a-entity .lightcube").forEach(element => {
+                    intersection = document.querySelector("a-entity[raycaster]").components.raycaster.getIntersection(element);
+                    if (intersection != undefined){
+                        if (closest === undefined || intersection.distance < closest.distance){
+                            closest = intersection;
+                        }
+                    }
+                });
+                closest.object.el.components.lightcube.data.moveTowards = true;
+                
+            }
+        });
+    </script>
 </head>
 <body>
     <a-scene>
