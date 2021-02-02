@@ -7,11 +7,47 @@ AFRAME.registerComponent('lightcube', {
         moveTowards:{
             type: 'boolean',
             default: false
+        },
+        width:{
+            type: 'number',
+            default: 1
+        },
+        height:{
+            type: 'number',
+            default: 1
+        },
+        depth:{
+            type: 'number',
+            default: 1
+        },
+        x:{
+            type: 'number',
+            default: 1
+        },
+        y:{
+            type: 'number',
+            default: 1
+        },
+        z:{
+            type: 'number',
+            default: 1
         }
     },
 
     init: function () {
-
+        const CONTEXT_AF = this;
+        CONTEXT_AF.el.classList.add('lightcube');
+        CONTEXT_AF.el.classList.add('interactive');
+        CONTEXT_AF.el.setAttribute('geometry', {
+            primitive: 'box',
+            width: CONTEXT_AF.data.width,
+            depth: CONTEXT_AF.data.depth,
+            height: CONTEXT_AF.data.height
+        });
+        CONTEXT_AF.el.object3D.position.set(CONTEXT_AF.data.x, CONTEXT_AF.data.y, CONTEXT_AF.data.z);
+        CONTEXT_AF.el.setAttribute('material', {
+            color: 'white'
+        });
     },
 
     update: function () {
@@ -37,17 +73,13 @@ AFRAME.registerComponent('lightcube', {
                 CONTEXT_AF.el.parentNode.removeChild(CONTEXT_AF.el);
                 //Create a new lightcube for camera
                 let cube = document.createElement('a-entity');
-                cube.setAttribute('lightcube');
-                cube.classList.add('lightcube');
-                cube.setAttribute('geometry',{
-                    primitive: 'box',
+                cube.setAttribute('lightcube',{
                     width: 0.1,
                     depth: 0.1,
-                    height: 0.1
-                });
-                cube.object3D.position.set(0.2, -0.15, -0.3);
-                cube.setAttribute('material', {
-                    color: 'white'
+                    height: 0.1,
+                    x: 0.2,
+                    y: -0.15,
+                    z: -0.3
                 });
                 //Add cube to camera
                 document.querySelector("a-entity[camera]").appendChild(cube);
