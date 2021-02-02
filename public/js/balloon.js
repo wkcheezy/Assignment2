@@ -1,10 +1,6 @@
 //TODO: Maybe make the player pick up money dropped by ballon and drop into bucket? Alyx possible through https://threejs.org/docs/index.html#api/en/math/Vector3.lerp
 AFRAME.registerComponent('balloon', {
     schema: {
-        points: {
-            type: 'number',
-            default: 1
-        },
         startHeight: {
             type: 'number',
             default: 1
@@ -21,21 +17,17 @@ AFRAME.registerComponent('balloon', {
 
     init: function () {
         const CONTEXT_AF = this;
-        //Set random point value
-        //TODO: Add const value for max point value (and by extension max width). Current: 9/0.9
-        CONTEXT_AF.data.points = Math.floor(Math.random() * 9) + 1;
         //Set balloon geometry
         CONTEXT_AF.el.setAttribute('geometry',{
             primitive: 'sphere',
             radius: 0.5
         });
         //Set the balloon material
-        //TODO: Set the balloon color based on its point value
         CONTEXT_AF.el.setAttribute('material', {
             opacity: 0.5
         });
         //Set balloon scale based on point value
-        let scaleVal = (10 - CONTEXT_AF.data.points) * 0.1;
+        let scaleVal = (10 - (Math.floor(Math.random() * 9) + 1)) * 0.1;
         CONTEXT_AF.el.setAttribute('scale', { x: scaleVal, y: scaleVal, z: scaleVal });
         //If a click is detected on the balloon
         CONTEXT_AF.el.addEventListener('click', () => {
@@ -56,6 +48,7 @@ AFRAME.registerComponent('balloon', {
     update: function() {
         const CONTEXT_AF = this;
         //TODO: Reduce the play circle radius
+        //TODO: Use Object3D distance
         let bx = 0;
         let bz = 0;
         while (true) {
@@ -72,8 +65,6 @@ AFRAME.registerComponent('balloon', {
         const CONTEXT_AF = this;
         if (CONTEXT_AF.el.object3D.position.y >= CONTEXT_AF.data.maxheight){
             if (CONTEXT_AF.el.firstChild.getAttribute('visible')) {
-                //Add points
-                document.querySelector('#gamerunner').components.gamerunner.data.score += CONTEXT_AF.data.points;
                 //Set sky and environemnt lights to ball color
                 document.querySelector('a-sky').setAttribute('material', 'topColor', CONTEXT_AF.el.firstChild.getAttribute('light').color);
             }

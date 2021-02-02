@@ -12,10 +12,6 @@ AFRAME.registerComponent('gamerunner', {
             type: 'boolean',
             default: false
         },
-        score: {
-            type: 'number',
-            default: 0
-        },
         colorFadeRate: {
             type: 'number',
             default: 1
@@ -54,10 +50,10 @@ AFRAME.registerComponent('gamerunner', {
                 //Create new balloon element
                 document.querySelector('#balloons').insertAdjacentHTML("beforeend", '<a-entity balloon class="balloon interactive"></a-entity >');
             }
-            //Set button text to display score
+            //Set button text to display stop text
             document.querySelectorAll('.gameText').forEach(textElement => {
                 textElement.setAttribute('text', {
-                    value: CONTEXT_AF.data.score
+                    value: 'Stop Balloons'
                 });
             });
             //Reduce sky color
