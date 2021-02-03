@@ -35,6 +35,7 @@ AFRAME.registerComponent('lightcube', {
     },
 
     init: function () {
+        //TODO: Add lights
         const CONTEXT_AF = this;
         CONTEXT_AF.el.classList.add('lightcube');
         CONTEXT_AF.el.classList.add('interactive');
@@ -60,6 +61,12 @@ AFRAME.registerComponent('lightcube', {
 
     tick: function () {
         const CONTEXT_AF = this;
+        //Get location data for color
+        const origin = new THREE.Vector3(0, 0, 0);
+        let pos = CONTEXT_AF.el.object3D.position;
+        if (CONTEXT_AF.el.parentElement.id != "cubes"){
+            pos = document.querySelector("a-entity[camera]").object3D.position;
+        }
         if (CONTEXT_AF.data.moveTowards){
             camLoc = document.querySelector("a-entity[camera]").object3D.position.clone();
             camLoc.z += 1.5
@@ -84,6 +91,47 @@ AFRAME.registerComponent('lightcube', {
                 //Add cube to camera
                 document.querySelector("a-entity[camera]").appendChild(cube);
             }
-        }  
+        }
+        const color = HSVtoRGB(pos, origin);
+        CONTEXT_AF.el.setAttribute('material', 'color', color);
     }
 });
+
+// adjusted from https://css-tricks.com/converting-color-spaces-in-javascript/
+function HSVtoRGB(pos, origin) {
+    let s = 100.0;
+    let h = (180 / Math.PI) * new THREE.Vector2(pos.x, pos.y).angle();
+    if (pos.z > 0){
+        h = 360 - h;
+    }
+    //Clamping function from https://www.w3resource.com/javascript-exercises/fundamental/javascript-fundamental-exercise-266.php
+    let l = Math.max(Math.min(origin.distanceTo(pos) * 4, Math.max(0, 100)), Math.min(0, 100));
+    
+    s /= 100;
+    l /= 100;
+    let c = (1 - Math.abs(2 * l - 1)) * s,
+        x = c * (1 - Math.abs((h / 60) % 2 - 1)),
+        m = l - c / 2,
+        r = 0,
+        g = 0,
+        b = 0;
+
+    if (0 <= h && h < 60) {
+        r = c; g = x; b = 0;
+    } else if (60 <= h && h < 120) {
+        r = x; g = c; b = 0;
+    } else if (120 <= h && h < 180) {
+        r = 0; g = c; b = x;
+    } else if (180 <= h && h < 240) {
+        r = 0; g = x; b = c;
+    } else if (240 <= h && h < 300) {
+        r = x; g = 0; b = c;
+    } else if (300 <= h && h < 360) {
+        r = c; g = 0; b = x;
+    }
+    r = Math.round((r + m) * 255);
+    g = Math.round((g + m) * 255);
+    b = Math.round((b + m) * 255);
+
+    return "rgb(" + r + "," + g + "," + b + ")";
+}
