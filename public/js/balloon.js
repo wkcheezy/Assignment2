@@ -47,14 +47,13 @@ AFRAME.registerComponent('balloon', {
 
     update: function() {
         const CONTEXT_AF = this;
-        //TODO: Reduce the play circle radius
         //TODO: Use Object3D distance
         let bx = 0;
         let bz = 0;
         while (true) {
-            bx = Math.floor(Math.random() * 25) + 1;
-            bz = Math.floor(Math.random() * 25) + 1;
-            if (Math.sqrt(bx * bx + bz * bz) < 25) {
+            bx = Math.floor(Math.random() * (5 - (-5) + 1) ) + -5;
+            bz = Math.floor(Math.random() * (5 - (-5) + 1) ) + -5;
+            if (Math.sqrt(bx * bx + bz * bz) < 5) {
                 break;
             }
         }
