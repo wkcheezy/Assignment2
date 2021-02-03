@@ -29,7 +29,7 @@ AFRAME.registerComponent('gamerunner', {
                 //Set button to display 'Start Game'
                 document.querySelectorAll('.gameText').forEach(textElement => {
                     textElement.setAttribute('text', {
-                        value: 'Start Game'
+                        value: 'Start Balloons'
                     });
                 });
             }
