@@ -35,7 +35,6 @@ AFRAME.registerComponent('lightcube', {
     },
 
     init: function () {
-        //TODO: Add lights
         const CONTEXT_AF = this;
         CONTEXT_AF.el.classList.add('lightcube');
         CONTEXT_AF.el.classList.add('interactive');
