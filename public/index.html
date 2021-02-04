@@ -33,11 +33,10 @@
                 const heldCube = document.querySelector("a-entity[camera] > a-entity[lightcube]");
                 if (heldCube) {
                     let cube = document.createElement('a-entity');
-                    //TODO: Get cube to match rotation of where the camera is facing
                     cube.setAttribute('lightcube', {
-                        x: document.querySelector("a-entity[camera]").object3D.position.x,
+                        x: document.querySelector("#rig").object3D.position.x,
                         y: 0.5,
-                        z: document.querySelector("a-entity[camera]").object3D.position.z - 3.0
+                        z: document.querySelector("#rig").object3D.position.z - 3.0
                     });
                     //Add cube to world
                     document.querySelector("#cubes").appendChild(cube);
