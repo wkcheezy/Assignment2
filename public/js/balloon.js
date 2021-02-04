@@ -1,4 +1,3 @@
-//TODO: Maybe make the player pick up money dropped by ballon and drop into bucket? Alyx possible through https://threejs.org/docs/index.html#api/en/math/Vector3.lerp
 AFRAME.registerComponent('balloon', {
     schema: {
         startHeight: {
@@ -24,30 +23,25 @@ AFRAME.registerComponent('balloon', {
         });
         //Set the balloon material
         CONTEXT_AF.el.setAttribute('material', {
-            opacity: 0.5
+            transparent: true,
+            opacity: 0.5,
+            color: 'white',
+            emissiveIntensity: 0.0
         });
         //Set balloon scale based on point value
         let scaleVal = (15 - (Math.floor(Math.random() * 9) + 1)) * 0.1;
         CONTEXT_AF.el.setAttribute('scale', { x: scaleVal, y: scaleVal, z: scaleVal });
         //If a click is detected on the balloon
         CONTEXT_AF.el.addEventListener('click', () => {
-            //TODO: Fix sound on Firefox
             document.querySelector('[sound]').components.sound.playSound();
-            CONTEXT_AF.el.firstChild.setAttribute('visible', true);
+            CONTEXT_AF.el.setAttribute('material', 'emissive', getRandomColor());
+            CONTEXT_AF.el.setAttribute('material', 'emissiveIntensity', 1.0);
+            CONTEXT_AF.el.setAttribute('material', 'opacity', 1.0);
         });
-        //Add light
-        let light = document.createElement('a-entity');
-        light.setAttribute('light',{
-            color: getRandomColor(),
-            type: 'point'
-        });
-        light.setAttribute('visible', false);
-        CONTEXT_AF.el.appendChild(light);
     },
 
     update: function() {
         const CONTEXT_AF = this;
-        //TODO: Use Object3D distance
         let bx = 0;
         let bz = 0;
         while (true) {
@@ -63,9 +57,10 @@ AFRAME.registerComponent('balloon', {
     tick: function () {
         const CONTEXT_AF = this;
         if (CONTEXT_AF.el.object3D.position.y >= CONTEXT_AF.data.maxheight){
-            if (CONTEXT_AF.el.firstChild.getAttribute('visible')) {
+            if (CONTEXT_AF.el.getAttribute('material').emissiveIntensity == 1.0) {
                 //Set sky and environemnt lights to ball color
-                document.querySelector('a-sky').setAttribute('material', 'topColor', CONTEXT_AF.el.firstChild.getAttribute('light').color);
+                console.log(CONTEXT_AF.el.getAttribute('material'));
+                document.querySelector('a-sky').setAttribute('material', 'topColor', CONTEXT_AF.el.getAttribute('material').emissive);
             }
             //Delete balloon
             CONTEXT_AF.el.parentNode.removeChild(CONTEXT_AF.el);
