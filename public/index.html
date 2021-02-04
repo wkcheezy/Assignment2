@@ -91,6 +91,9 @@
             <!-- VR Controller -->
             <!-- TODO: Check to see if teleport is working for all headsets, and to set slide movement using joystick as movement backup-->
             <a-entity 
+                sphere-collider="objects: .interactive"
+                super-hands
+                hand-controls="hand: left;"
                 teleport-controls="cameraRig: #rig; teleportOrigin: #head; startEvents:teleStart; endEvents:teleEnd;"
                 touchpadcontrols vive-controls="hand: left"
                 windows-motion-controls="hand: left"
@@ -100,6 +103,9 @@
                 oculus-go-controls="hand: left">
             </a-entity>
             <a-entity    
+                sphere-collider="objects: .interactive"
+                super-hands
+                hand-controls="hand: right;"
                 teleport-controls="cameraRig: #rig; teleportOrigin: #head; startEvents:teleStart; endEvents:teleEnd;"
                 touchpadcontrols
                 vive-controls="hand: right" 
@@ -124,7 +130,7 @@
             </a-entity>
             <!-- Button -->
             <a-entity 
-                gamerunner 
+                gamerunner clickable
                 id="gamerunner"
                 class="button interactive"
                 geometry="primitive:cylinder; radius:0.15; height:0.2;" 
