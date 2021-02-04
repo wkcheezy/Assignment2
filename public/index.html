@@ -89,7 +89,16 @@
                 </a-entity>
             </a-entity>
             <!-- VR Controller -->
-            <!-- TODO: Add a component that switches which hand is active-->
+            <!-- TODO: Check to see if teleport is working for all headsets, and to set slide movement using joystick as movement backup-->
+            <a-entity 
+                teleport-controls="cameraRig: #rig; teleportOrigin: #head; startEvents:teleStart; endEvents:teleEnd;"
+                touchpadcontrols vive-controls="hand: left"
+                windows-motion-controls="hand: left"
+                oculus-touch-controls="hand: left"
+                daydream-controls="hand: left"
+                gearvr-controls="hand: left"
+                oculus-go-controls="hand: left">
+            </a-entity>
             <a-entity    
                 teleport-controls="cameraRig: #rig; teleportOrigin: #head; startEvents:teleStart; endEvents:teleEnd;"
                 touchpadcontrols
