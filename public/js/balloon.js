@@ -1,10 +1,5 @@
-//TODO: Add dict for colors
 AFRAME.registerComponent('balloon', {
     schema: {
-        points: {
-            type: 'number',
-            default: 1
-        },
         startHeight: {
             type: 'number',
             default: 1
@@ -15,46 +10,44 @@ AFRAME.registerComponent('balloon', {
         },
         riseRate:{
             type: 'number',
-            default: 0.05
+            default: 0.008
         }
     },
 
     init: function () {
         const CONTEXT_AF = this;
-        //Set random point value
-        //TODO: Add const value for max point value (and by extension max width). Current: 9/0.9
-        CONTEXT_AF.data.points = Math.floor(Math.random() * 9) + 1;
         //Set balloon geometry
         CONTEXT_AF.el.setAttribute('geometry',{
             primitive: 'sphere',
             radius: 0.5
         });
         //Set the balloon material
-        //TODO: Set the balloon color based on its point value
-        CONTEXT_AF.el.setAttribute('material', {color: 'red'});
+        CONTEXT_AF.el.setAttribute('material', {
+            transparent: true,
+            opacity: 0.5,
+            color: 'white',
+            emissiveIntensity: 0.0
+        });
         //Set balloon scale based on point value
-        let scaleVal = (10 - CONTEXT_AF.data.points) * 0.1;
+        let scaleVal = (15 - (Math.floor(Math.random() * 9) + 1)) * 0.1;
         CONTEXT_AF.el.setAttribute('scale', { x: scaleVal, y: scaleVal, z: scaleVal });
         //If a click is detected on the balloon
         CONTEXT_AF.el.addEventListener('click', () => {
-            //Add points
-            document.querySelector('#gamerunner').components.gamerunner.data.score += CONTEXT_AF.data.points;
-            //TODO: Fix sound on Firefox
             document.querySelector('[sound]').components.sound.playSound();
-            //Delete balloon
-            CONTEXT_AF.el.parentNode.removeChild(CONTEXT_AF.el);
+            CONTEXT_AF.el.setAttribute('material', 'emissive', getRandomColor());
+            CONTEXT_AF.el.setAttribute('material', 'emissiveIntensity', 1.0);
+            CONTEXT_AF.el.setAttribute('material', 'opacity', 1.0);
         });
     },
 
     update: function() {
-        //TODO: Swap this variable creation with just setting the positions
         const CONTEXT_AF = this;
         let bx = 0;
         let bz = 0;
         while (true) {
-            bx = Math.floor(Math.random() * 25) + 1;
-            bz = Math.floor(Math.random() * 25) + 1;
-            if (Math.sqrt(bx * bx + bz * bz) < 25) {
+            bx = Math.floor(Math.random() * (5 - (-5) + 1) ) + -5;
+            bz = Math.floor(Math.random() * (5 - (-5) + 1) ) + -5;
+            if (Math.sqrt(bx * bx + bz * bz) < 5) {
                 break;
             }
         }
@@ -62,11 +55,28 @@ AFRAME.registerComponent('balloon', {
     },
 
     tick: function () {
-        if (this.el.object3D.position.y >= this.data.maxheight){
-            this.el.remove();
+        const CONTEXT_AF = this;
+        if (CONTEXT_AF.el.object3D.position.y >= CONTEXT_AF.data.maxheight){
+            if (CONTEXT_AF.el.getAttribute('material').emissiveIntensity == 1.0) {
+                //Set sky and environemnt lights to ball color
+                console.log(CONTEXT_AF.el.getAttribute('material'));
+                document.querySelector('a-sky').setAttribute('material', 'topColor', CONTEXT_AF.el.getAttribute('material').emissive);
+            }
+            //Delete balloon
+            CONTEXT_AF.el.parentNode.removeChild(CONTEXT_AF.el);
         }
         else{
-            this.el.object3D.position.y += this.data.riseRate;
+            CONTEXT_AF.el.object3D.position.y += CONTEXT_AF.data.riseRate;
         }
     }
 });
+
+// Function from https://aframe.io/docs/1.1.0/guides/building-a-minecraft-demo.html#random-color-component
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
