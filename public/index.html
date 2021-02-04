@@ -91,7 +91,7 @@
             <!-- TODO: Add a component that switches which hand is active-->
             <!-- https://aframe.io/docs/1.1.0/introduction/interactions-and-controllers.html#creating-custom-controllers -->
             <a-entity laser-controls="hand:right;" raycaster="far:20; interval:100; objects:.interactive"
-                teleport-controls="cameraRig: #rig; teleportOrigin: #head; button:trigger;"></a-entity>
+                teleport-controls="cameraRig: #rig; teleportOrigin: #head; button:trackpad; startEvents:touchstart; endEvents:touchend;"></a-entity>
         </a-entity>
 
         <!-- Environment-->
