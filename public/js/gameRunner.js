@@ -34,7 +34,6 @@ AFRAME.registerComponent('gamerunner', {
                 });
             }
             else{
-                console.log("Game start!");
                 CONTEXT_AF.data.gameRunning = true;
             }
         })
@@ -74,7 +73,6 @@ AFRAME.registerComponent('gamerunner', {
                     rgb[i] = rgb[i].toString(16);
                     rgb[i].length == 1 ? hex += "0" + rgb[i] : hex += rgb[i]; 
                 }
-                console.log(hex);
                 document.querySelector('a-sky').setAttribute('material', 'topColor', hex);
             }
         }
