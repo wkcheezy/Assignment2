@@ -6,8 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMD3901B Assignment 2</title>
-    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <!-- Note: I had to switch to the master version of Aframe to get it to run on my Windows Mixed Reality headset.
+        This was the issue I was getting https://github.com/mrdoob/three.js/issues/20715
+        While Three.js seemed to have fixed it on their end, Aframe 1.1.0 seems to be broken still, so I have to switch the master/nightly
+        dist. I have downloaded the copy of Aframe that worked for me and placed it in the js folder. If performance is siffering due to the
+        reliance on a local copy, you can attempt to use the CDN version by uncommenting the link to the CDN below, though note that this may
+        break the app due to the master version being updated constantly. 
+    -->
+    <script src="./js/aframe-master.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.2.0/index.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@a20bae2527c7a97479d7b368507dbd2133f62860/dist/aframe-master.min.js"></script> -->
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
     <script src="./js/lightcube.js"></script>
     <script src="./js/balloon.js"></script>
     <script src="./js/gameRunner.js"></script>
