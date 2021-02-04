@@ -78,21 +78,20 @@
         <a-entity sound="src:#background_music; autoplay:true; volume:0.5; loop:true;"></a-entity>
 
         <!-- Camera -->
-        <a-entity camera wasd-controls look-controls position="0 2.2 6">
-            <!-- Desktop/Mobile pointer-->
-            <a-entity 
-                cursor="rayOrigin:mouse"
-                raycaster="far:20; interval:100; objects:.interactive">
+        <!-- Using a-frame extra's controls-->
+        <a-entity id="rig" movement-controls position="0 0 10">
+            <a-entity id="head" camera look-controls position="0 1.6 0">
+                <!-- Desktop/Mobile pointer-->
+                <a-entity 
+                    cursor="rayOrigin:mouse"
+                    raycaster="far:20; interval:100; objects:.interactive">
+                </a-entity>
             </a-entity>
-        </a-entity>
-
-        <!-- VR Controller -->
-        <!-- TODO: Add a component that switches which hand is active-->
-        <!-- TODO: Add custom controller model-->
-        <!-- https://aframe.io/docs/1.1.0/introduction/interactions-and-controllers.html#creating-custom-controllers -->
-        <a-entity 
-            laser-controls="hand:right;" 
-            raycaster="far:20; interval:100; objects:.interactive">
+            <!-- VR Controller -->
+            <!-- TODO: Add a component that switches which hand is active-->
+            <!-- https://aframe.io/docs/1.1.0/introduction/interactions-and-controllers.html#creating-custom-controllers -->
+            <a-entity laser-controls="hand:right;" raycaster="far:20; interval:100; objects:.interactive"
+                teleport-controls="cameraRig: #rig; teleportOrigin: #head; button:trigger;"></a-entity>
         </a-entity>
 
         <!-- Environment-->
