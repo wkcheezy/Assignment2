@@ -48,6 +48,9 @@ AFRAME.registerComponent('lightcube', {
         CONTEXT_AF.el.setAttribute('material', {
             color: 'white'
         });
+        CONTEXT_AF.el.setAttribute('grabbable',{
+            usePhsyics: 'never'
+        });
     },
 
     update: function () {
