@@ -159,6 +159,18 @@
         <!-- TODO: Add randomization of color and position. Also points?-->
         <a-entity id="balloons">
         </a-entity>
+
+        <!-- Light cubes-->
+        <a-entity id="cubes">
+            <a-entity
+                grabbable
+                lightcube="x:5; y:0.5; z:0;">
+            </a-entity>
+            <a-entity grabbable lightcube="x:-5; y:0.5; z:0;">
+            </a-entity>
+            <a-entity grabbable lightcube="x:0; y:0.5; z:-5;">
+            </a-entity>
+        </a-entity>
     </a-scene>
 </body>
 </html>
