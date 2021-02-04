@@ -62,13 +62,11 @@ AFRAME.registerComponent('lightcube', {
     tick: function () {
         const CONTEXT_AF = this;
         //Get location data for color
-        const origin = new THREE.Vector3(0, 0, 0);
-        let pos = CONTEXT_AF.el.object3D.position;
-        if (CONTEXT_AF.el.parentElement.id != "cubes"){
-            pos = document.querySelector("a-entity[camera]").object3D.position;
-        }
+        let pos = new THREE.Vector3(0, 0, 0);
+        CONTEXT_AF.el.object3D.getWorldPosition(pos);
         if (CONTEXT_AF.data.moveTowards){
-            camLoc = document.querySelector("a-entity[camera]").object3D.position.clone();
+            let camLoc = new THREE.Vector3(0, 0, 0);
+            document.querySelector("a-entity[camera]").object3D.getWorldPosition(camLoc);
             camLoc.z += 1.5
             if (CONTEXT_AF.el.object3D.position.distanceTo(camLoc) > 3.0){
                 CONTEXT_AF.el.object3D.position.lerp(camLoc, CONTEXT_AF.data.speed);
@@ -92,7 +90,7 @@ AFRAME.registerComponent('lightcube', {
                 document.querySelector("a-entity[camera]").appendChild(cube);
             }
         }
-        const color = HSVtoRGB(pos, origin);
+        const color = HSVtoRGB(pos, new THREE.Vector3(0, 0, 0));
         CONTEXT_AF.el.setAttribute('material', 'color', color);
     }
 });
