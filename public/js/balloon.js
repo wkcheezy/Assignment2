@@ -27,7 +27,7 @@ AFRAME.registerComponent('balloon', {
             opacity: 0.5
         });
         //Set balloon scale based on point value
-        let scaleVal = (10 - (Math.floor(Math.random() * 9) + 1)) * 0.1;
+        let scaleVal = (15 - (Math.floor(Math.random() * 9) + 1)) * 0.1;
         CONTEXT_AF.el.setAttribute('scale', { x: scaleVal, y: scaleVal, z: scaleVal });
         //If a click is detected on the balloon
         CONTEXT_AF.el.addEventListener('click', () => {
